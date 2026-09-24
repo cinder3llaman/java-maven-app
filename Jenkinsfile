@@ -19,7 +19,7 @@ maven 'Maven'
                     sh 'echo $PASS | docker login -u $USER --password-stdin'
                     sh 'docker push kachiie/demo-app:jma-2.0'
                 }
-                sh 'mvn package'
+                }
             }
         }
         stage('Test') {
