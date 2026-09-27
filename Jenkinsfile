@@ -7,13 +7,6 @@ pipeline {
         maven 'Maven'
     }
     stages {
-        stage("init") {
-            steps {
-                script {
-                    gv = load "script.groovy"
-                }
-            }
-        }
 
         stage("build jar") {
             steps {
@@ -21,7 +14,6 @@ pipeline {
                     buildJar()
                 }
             }
-        }
 
         stage("build and push image") {
             steps {
@@ -31,14 +23,12 @@ pipeline {
                     dockerPush 'kachiie/demo-app:jma-3.0'
                 }
             }
-        }
-        
+    
         stage("deploy") {
             steps {
-                script {
-                    gv.deployApp()
+                deployApp()
                 }
             }
         }               
     }
-}
+
