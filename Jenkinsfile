@@ -14,7 +14,7 @@ pipeline {
                     buildJar()
                 }
             }
-
+        }
         stage("build and push image") {
             steps {
                 script {
@@ -23,7 +23,7 @@ pipeline {
                     dockerPush 'kachiie/demo-app:jma-3.0'
                 }
             }
-    
+        }
         stage("deploy") {
             steps {
                 script {
@@ -32,4 +32,5 @@ pipeline {
             }
         }               
     
-
+    }
+}
