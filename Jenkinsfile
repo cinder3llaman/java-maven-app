@@ -26,9 +26,10 @@ pipeline {
     
         stage("deploy") {
             steps {
+                script {
                 deployApp()
                 }
             }
         }               
-    }
+    
 
