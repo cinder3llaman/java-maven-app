@@ -25,7 +25,7 @@ pipeline {
         stage("build image") {
             steps {
                 script {
-                    gv.buildImage()
+                    gv.buildImage 'kachiie/demo-app:jma-3.0'
                 }
             }
         }
