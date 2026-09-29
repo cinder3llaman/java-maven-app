@@ -18,19 +18,12 @@ pipeline {
         stage("build and push image") {
             steps {
                 script {
-                    buildImage 'kachiie/demo-app:jma-3.0'
-                    dockerLogin()
-                    dockerPush 'kachiie/demo-app:jma-3.0'
+                    buildImage ()
                 }
             }
-        }
-        stage("deploy") {
-            steps {
-                script {
-                deployApp()
-                }
+    
             }
         }               
     
     }
-}
+
