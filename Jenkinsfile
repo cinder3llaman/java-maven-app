@@ -18,7 +18,7 @@ pipeline {
         stage("build and push image") {
             steps {
                 script {
-                    buildImage ()
+                    buildImage 'kachiie/demo-app:jma-3.0'
                 }
             }
     
