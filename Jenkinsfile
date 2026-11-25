@@ -33,6 +33,7 @@ pipeline {
             }
         }
         stage('build image') {
+            when { not { changelog '.*ci: version bump.*'}}
             steps {
                 script {
                     echo 'building the docker image...'
@@ -59,13 +60,13 @@ pipeline {
             }               
         }
         stage('commit version update'){
+            when { not { changelog '.*ci: version bump.*'}}
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'github-credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]){
-                        sh 'git config user.name "jenkins CI" '
+                        sh 'git config user.name "jenkins CI"'
                         sh 'git config user.email "cinder3llaman@users.noreply.github.com"'
-                        sh "git remote set-url origin https://${USER}:${PASS}@github.com/cinder3llaman/java-maven-app.git"
-                        sh 'git remove -v'
+                        sh 'git remote set-url origin https://${USER}:${PASS}@github.com/cinder3llaman/java-maven-app.git'
                         sh 'git add .'
                         sh 'git commit -m "ci: version bump"'
                         sh 'git push origin HEAD:jenkins-jobs'
