@@ -22,7 +22,7 @@ pipeline {
                         versions:commit'
                     def matcher = readFile('pom.xml') =~ '<version>(.+)</version>'
                     def version = matcher[0][1]
-                    env.IMAGE_NAME = "kachiie/demo-app:jma-$version-$BUILD_NUMBER"
+                    env.IMAGE_NAME = ""$version-$BUILD_NUMBER""
                 }
             }
         }
@@ -33,7 +33,6 @@ pipeline {
             }
         }
         stage('build image') {
-            when { not { changelog '.*ci: version bump.*'}}
             steps {
                 script {
                     echo 'building the docker image...'
@@ -60,7 +59,6 @@ pipeline {
             }               
         }
         stage('commit version update'){
-            when { not { changelog '.*ci: version bump.*'}}
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'github-credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]){
