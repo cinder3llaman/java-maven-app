@@ -29,6 +29,7 @@ pipeline {
         stage('build app') {
             steps {
                 echo 'building application jar...'
+                sh 'rm -rf target'
                 buildJar()
             }
         }
